@@ -1,0 +1,66 @@
+name: Build and release resources
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Build ZIP
+        run: |
+          cd pack
+          zip -r "../artiforge-resources-${{ steps.version.outputs.VERSION }}.zip" . -x "*.example*"
+          cd ..
+
+      - name: SHA-256
+        id: sha
+        run: |
+          SHA=$(sha256sum "artiforge-resources-${{ steps.version.outputs.VERSION }}.zip" | cut -d' ' -f1)
+          echo "SHA256=$SHA" >> "$GITHUB_OUTPUT"
+          echo "sha256: $SHA"
+
+      - name: GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artiforge-resources-${{ steps.version.outputs.VERSION }}.zip
+          body: |
+            ArtiForge Resources v${{ steps.version.outputs.VERSION }}
+            SHA-256: `${{ steps.sha.outputs.SHA256 }}`
+
+      - name: Update manifest.json
+        run: |
+          python3 - <<'EOF'
+          import json
+          v = "${{ steps.version.outputs.VERSION }}"
+          sha = "${{ steps.sha.outputs.SHA256 }}"
+          repo = "${{ github.repository }}"
+          with open("manifest.json") as f:
+              m = json.load(f)
+          m["version"] = v
+          m.setdefault("pack", {})["file"] = f"artiforge-resources-{v}.zip"
+          m["pack"]["url"] = f"https://github.com/{repo}/releases/download/v{v}/artiforge-resources-{v}.zip"
+          m["pack"]["sha256"] = sha
+          with open("manifest.json", "w") as f:
+              json.dump(m, f, indent=2)
+              f.write("\n")
+          EOF
+
+      - name: Commit manifest.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add manifest.json
+          git diff --cached --quiet || git commit -m "Release v${{ steps.version.outputs.VERSION }}: update manifest"
+          git push origin HEAD:main
