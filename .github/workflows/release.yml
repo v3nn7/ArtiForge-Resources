@@ -23,6 +23,8 @@ jobs:
           cd pack
           zip -r "../artiforge-resources-${{ steps.version.outputs.VERSION }}.zip" . -x "*.example*"
           cd ..
+          # Evergreen asset: same content, stable name for pack.host-url.
+          cp "artiforge-resources-${{ steps.version.outputs.VERSION }}.zip" artiforge-resources.zip
 
       - name: SHA-256
         id: sha
@@ -34,7 +36,9 @@ jobs:
       - name: GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: artiforge-resources-${{ steps.version.outputs.VERSION }}.zip
+          files: |
+            artiforge-resources-${{ steps.version.outputs.VERSION }}.zip
+            artiforge-resources.zip
           body: |
             ArtiForge Resources v${{ steps.version.outputs.VERSION }}
             SHA-256: `${{ steps.sha.outputs.SHA256 }}`

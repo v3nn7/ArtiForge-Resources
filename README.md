@@ -37,7 +37,8 @@ No legacy CustomModelData, no overrides of vanilla files.
 1. Add/change content under `pack/` (and Blockbench sources under `models/`).
 2. Commit to `main`.
 3. Tag the release: `git tag v1.0.1 && git push origin v1.0.1`.
-4. GitHub Actions zips `pack/` into `artiforge-resources-<version>.zip`,
+4. GitHub Actions zips `pack/` into `artiforge-resources-<version>.zip`
+   (plus an evergreen `artiforge-resources.zip` for `pack.host-url`),
    creates a GitHub Release and **automatically updates `manifest.json`**
    (`version`, `pack.url`, `pack.sha256`) on `main`.
 5. The plugin downloads the release ZIP on next check/startup,
