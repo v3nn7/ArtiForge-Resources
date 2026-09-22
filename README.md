@@ -32,6 +32,17 @@ ArtiForge item `model.id: artiforge:kroliczy_miecz`
 
 No legacy CustomModelData, no overrides of vanilla files.
 
+## Armor (equipment assets)
+
+Wearable items (see `equipment:` in plugin item YAMLs) resolve to:
+
+```text
+equipment.asset-id: artiforge:kroliczy
+  -> assets/artiforge/models/armor/kroliczy.json   (layers config)
+  -> assets/artiforge/textures/entity/armor/kroliczy_layer_1.png (64x32)
+  -> assets/artiforge/textures/entity/armor/kroliczy_layer_2.png (64x32, leggings)
+```
+
 ## Release flow
 
 1. Add/change content under `pack/` (and Blockbench sources under `models/`).
@@ -47,7 +58,8 @@ No legacy CustomModelData, no overrides of vanilla files.
 
 ## Current items
 
-| ID | Model | Texture |
-|----|-------|---------|
-| `kroliczy_miecz` | ✅ | ✅ |
-| `inferno_blade` | ✅ | ❌ (missing — add `textures/item/inferno_blade.png`) |
+| ID | Model | Texture | Armor |
+|----|-------|---------|-------|
+| `kroliczy_miecz` | ✅ | ✅ | — |
+| `kroliczy_helm` | ✅ | ✅ | ✅ (`artiforge:kroliczy`) |
+| `inferno_blade` | ✅ | ❌ (missing — add `textures/item/inferno_blade.png`) | — |

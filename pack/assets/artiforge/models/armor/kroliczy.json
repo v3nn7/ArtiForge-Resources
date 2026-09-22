@@ -1,0 +1,10 @@
+{
+  "layers": {
+    "humanoid": [
+      { "texture": "artiforge:entity/armor/kroliczy_layer_1" }
+    ],
+    "humanoid_leggings": [
+      { "texture": "artiforge:entity/armor/kroliczy_layer_2" }
+    ]
+  }
+}
