@@ -43,8 +43,12 @@ jobs:
             ArtiForge Resources v${{ steps.version.outputs.VERSION }}
             SHA-256: `${{ steps.sha.outputs.SHA256 }}`
 
-      - name: Update manifest.json
+      - name: Commit manifest.json
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git checkout -B main origin/main
           python3 - <<'EOF'
           import json
           v = "${{ steps.version.outputs.VERSION }}"
@@ -60,11 +64,6 @@ jobs:
               json.dump(m, f, indent=2)
               f.write("\n")
           EOF
-
-      - name: Commit manifest.json
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add manifest.json
           git diff --cached --quiet || git commit -m "Release v${{ steps.version.outputs.VERSION }}: update manifest"
-          git push origin HEAD:main
+          git push origin main
