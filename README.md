@@ -61,5 +61,3 @@ equipment.asset-id: artiforge:kroliczy
 | ID | Model | Texture | Armor |
 |----|-------|---------|-------|
 | `kroliczy_miecz` | ✅ | ✅ | — |
-| `kroliczy_helm` | ✅ | ✅ | ✅ (`artiforge:kroliczy`) |
-| `inferno_blade` | ✅ | ❌ (missing — add `textures/item/inferno_blade.png`) | — |
