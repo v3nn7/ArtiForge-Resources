@@ -51,6 +51,12 @@ Blocks with properties need a blockstate entry for each relevant state. After
 installing the files on the server, run `/af resources reload` and have players
 reload or accept the resource pack. `/af blocks` lists detected block models
 and blockstate files.
+## ArtiForge editor emblem
+
+The plugin editor uses a custom generated anvil emblem in its inventory header.
+Its modern item model is `assets/artiforge/items/editor/emblem.json`, backed by
+`assets/artiforge/models/item/editor/emblem.json` and the transparent texture
+`assets/artiforge/textures/item/editor/emblem.png`.
 ## Armor (equipment assets)
 
 Wearable items (see `equipment:` in plugin item YAMLs) resolve to:
