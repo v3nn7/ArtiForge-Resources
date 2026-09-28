@@ -32,6 +32,25 @@ ArtiForge item `model.id: artiforge:kroliczy_miecz`
 
 No legacy CustomModelData, no overrides of vanilla files.
 
+## Replacing vanilla block models
+
+Use standard resource pack files to replace a vanilla block appearance. Put its
+blockstate file under `pack/assets/minecraft/blockstates/<block>.json`, a model
+under `pack/assets/<namespace>/models/block/`, and textures under
+`pack/assets/<namespace>/textures/block/`. The blockstate filename must match
+the vanilla block ID. In the ArtiForge server merge, files from
+`resources/custom` take precedence over downloaded resources at identical paths.
+
+For example, to change oak planks, define
+`pack/assets/minecraft/blockstates/oak_planks.json` pointing its empty variant
+to `artiforge:block/oak_planks_custom`, then create
+`pack/assets/artiforge/models/block/oak_planks_custom.json` with parent
+`minecraft:block/cube_all` and texture `artiforge:block/oak_planks_custom`.
+Add the PNG at `pack/assets/artiforge/textures/block/oak_planks_custom.png`.
+Blocks with properties need a blockstate entry for each relevant state. After
+installing the files on the server, run `/af resources reload` and have players
+reload or accept the resource pack. `/af blocks` lists detected block models
+and blockstate files.
 ## Armor (equipment assets)
 
 Wearable items (see `equipment:` in plugin item YAMLs) resolve to:
