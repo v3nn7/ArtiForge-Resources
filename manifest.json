@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "version": "1.0.7",
+  "version": "1.0.8",
   "minecraft": [
     "1.21.11"
   ],
   "channel": "stable",
   "pack": {
-    "file": "artiforge-resources-1.0.7.zip",
-    "url": "https://github.com/v3nn7/ArtiForge-Resources/releases/download/v1.0.7/artiforge-resources-1.0.7.zip",
-    "sha256": "4e770ce880b1e97cd7929619376bedc1b0455b5b0faa4665570868502573c34a",
+    "file": "artiforge-resources-1.0.8.zip",
+    "url": "https://github.com/v3nn7/ArtiForge-Resources/releases/download/v1.0.8/artiforge-resources-1.0.8.zip",
+    "sha256": "97b5e2b820f4d3e28a78193edbb7eebf71c9128ce8375957cda4f97c9e9d7202",
     "size": -1
   },
   "notes": "sha256 is filled automatically by the release workflow. Empty sha256 disables hash verification."
